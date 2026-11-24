@@ -2132,6 +2132,8 @@ class Component extends DCLogic {
   // a moment Companion speaks at (Nov 5, Alberto: at the right time, not from the bar): open, it shows its card in the
   // conversation; closed, a short message waits above the launcher
   compMoment(kind) { const P = window.CompanionPanel; if (!P || this.rel() === 'today' || this.rel() === 'jan' || this.state.view !== 'editor') return;
+    // (Nov 24) the user test (?nocomp) keeps Companion quiet while people try the Sizing controls; a title edit still brings it
+    if (kind === 'appearance' && new URLSearchParams(window.location.search).has('nocomp')) return;
     const r = P.moment(this.compApi(), kind); if (r && r !== 'shown' && !this.compOn()) this.setState({ compBubble: { id: r.id, text: kind === 'appearance' ? 'With your new headings, your ' + r.name + ' runs long. I have a shorter one.' : 'Your ' + r.name + ' is longer now. I have a shorter one, in your own words.' } }); }
   compSuggest() { if ((this.state.cfgViewport || 'Desktop') !== 'Desktop') { this.toast('Companion opens on Desktop in this prototype'); return; }
     if (this.coverOrig != null) this.coverTitle(this.coverOrig);
