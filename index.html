@@ -8,9 +8,10 @@
 <!--
   The user test of the Sizing variants (Nov 24, Alberto). Participants try both versions on their own, on desktop, and
   switch between them freely with the Version 1 / Version 2 switch at the bottom. Neutral names, so neither version
-  sounds like the right one. The link picks the first version (counterbalancing):
+  sounds like the right one. The link picks the first version:
     ?v=a  Version 1 first   ?v=b  Version 2 first
-  Version 1 is Raw controls (Font size, Headings, Block spacing), Version 2 is Read or show (Text and headings).
+  Since Nov 25 (Alberto), Version 1 is Read or show (Text and headings) and Version 2 is Raw controls (Font size,
+  Headings, Block spacing), so the sessions start on Read or show.
   The preview stays on Desktop at any window width (?viewport=Desktop).
 -->
 <style>
@@ -32,7 +33,7 @@
   <button data-v="b">Version 2</button>
 </div>
 <script>
-  const VARIANTS = { a: 'controls-named', b: 'controls-readshow' };
+  const VARIANTS = { a: 'controls-readshow', b: 'controls-named' };
   const app = document.getElementById('app'), sw = document.getElementById('switch');
   const first = new URLSearchParams(location.search).get('v');
   let cur = null;
@@ -40,7 +41,7 @@
   function load(v) {
     if (v === cur) return;
     cur = v;
-    app.src = 'app/index.html?bar=0&viewport=Desktop&nocomp=1&b=20261124104916&test=' + v + '#' + VARIANTS[v]; // the query differs, so the editor reloads
+    app.src = 'app/index.html?bar=0&viewport=Desktop&nocomp=1&b=20261125092537&test=' + v + '#' + VARIANTS[v]; // the query differs, so the editor reloads
     sw.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
   }
   sw.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) load(b.dataset.v); });
