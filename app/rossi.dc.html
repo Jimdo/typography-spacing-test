@@ -724,6 +724,8 @@ class Component extends DCLogic {
       if (['title', 'text', 'kicker'].includes(kind)) nodes.forEach((n) => { n.setAttribute('contenteditable', 'true'); n.setAttribute('spellcheck', 'false'); });
       this.frame(sel, nodes, 8); };
     this.deselect = () => { if (this.selected) this.selected.forEach((n) => n.removeAttribute('contenteditable')); this.selected = null; sel.style.display = 'none'; tb.style.display = 'none'; };
+    // (Nov 25, Alberto) opening Appearance deselects whatever was selected on the site: the text being edited and the Reviews element
+    window.CMSDeselect = () => { try { const s = document.getSelection(); if (s) s.removeAllRanges(); } catch (e) {} this.deselect(); document.querySelectorAll('[data-review-element][data-selected]').forEach((x) => x.removeAttribute('data-selected')); };
     this.onDown = (e) => {
       if (e.target.closest('[data-cms-tb]')) { e.preventDefault(); return; }
       const n = e.target.closest && e.target.closest('[data-el]:not([data-cms-hidden])');

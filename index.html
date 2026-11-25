@@ -41,7 +41,7 @@
   function load(v) {
     if (v === cur) return;
     cur = v;
-    app.src = 'app/index.html?bar=0&viewport=Desktop&nocomp=1&b=20261125092537&test=' + v + '#' + VARIANTS[v]; // the query differs, so the editor reloads
+    app.src = 'app/index.html?bar=0&viewport=Desktop&nocomp=1&b=20261125121000&test=' + v + '#' + VARIANTS[v]; // the query differs, so the editor reloads
     sw.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
   }
   sw.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) load(b.dataset.v); });

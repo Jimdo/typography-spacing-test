@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://webteam.jimstatic.com/fonts/common/euclidcircular-semibold.css">
 <link rel="stylesheet" href="https://webteam.jimstatic.com/fonts/common/euclidcircular-medium.css">
 <link rel="stylesheet" href="_ds/jimdo-design-system-jui-9e82d52b-a387-4843-9ac5-0d0f4f571fcb/_ds_bundle.css?v=jui85c">
-<link rel="prefetch" href="rossi.dc.html?v=31">
+<link rel="prefetch" href="rossi.dc.html?v=32">
 <link rel="preload" href="images/s2-hero-opt.jpg" as="image">
 <!-- the runtime renders the template once as plain HTML before React, and the Before page (static, fast) can finish
      loading then: its onLoad="{{ onFrameLoad }}" runs as code, so the name must exist (React sets the real handler) -->
@@ -24,7 +24,7 @@
 <script src="system.js?v=147"></script>
 <script src="themesites.js?v=63"></script>
 <script src="expert-prompts.js?v=7cde5908"></script>
-<script src="typesystem.js?v=14.13"></script>
+<script src="typesystem.js?v=14.14"></script>
 <script src="specs.js?v=33"></script>
 <script src="components.js?v=222"></script>
 <script src="companion.js?v=17"></script>
@@ -2232,7 +2232,7 @@ class Component extends DCLogic {
     + 'html:root { --space-block-y: 80px; --space-intro-to-content: 40px; --space-columns: 30px; --space-text-to-media: 30px; --space-block-x: 20px; }\n'
     + '@media (min-width: 801px) { html:root { --space-block-x: max(20px, (100vi - 860px) / 2); } }\n'
     + '@media (min-width: 1281px) { html:root { --space-block-x: max(60px, (100vi - 1160px) / 2); } }\n';
-  static AFTER_SRC = 'rossi.dc.html?v=31';
+  static AFTER_SRC = 'rossi.dc.html?v=32';
   // release stages (Nov 3, Alberto, from the Roadmap): Today is the CMS as it is; January, new sites get the new type
   // (release 2); Spring, existing sites switch (release 3); Later has every follow-up and the usability test's variants
   static RELEASES = [
@@ -2520,7 +2520,7 @@ class Component extends DCLogic {
   openPanel(panel) {
     const patch = { panel, rect: null };
     // (Nov 20, Alberto) Appearance and Companion never share the screen: opening Appearance closes Companion, the way it leaves
-    if (panel === 'design') { patch.apView = 'main'; this.loadThemeFonts(); if (this.state.comp) this.compApi().close(); }
+    if (panel === 'design') { patch.apView = 'main'; this.loadThemeFonts(); if (this.state.comp) this.compApi().close(); try { const w = this.doc && this.doc.defaultView; if (w && w.CMSDeselect) w.CMSDeselect(); } catch (e) { /* the site is not loaded yet */ } }
     if (panel === 'block') {
       patch.blockBg = this.readBg(this.blockTarget);
       patch.blockStyle = (this.blockTarget && this.blockTarget.dataset.cmsStyle) || this.state.colorStyle;
